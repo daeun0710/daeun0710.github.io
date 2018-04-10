@@ -1,0 +1,56 @@
+<style>
+  table {
+    width: 800px;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #444444;
+  }
+  h1{
+    background-color: #FFE4E1;
+  }
+</style>
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<center>
+
+<h1>Write New Diary</h1>
+
+<form action="/home/create" method="post" >
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  Title<br><input type="text" name="post_title" size="50"><br><br>
+  Content<br><textarea name="post_content" rows="4" cols="52"></textarea><br><br><br>
+  <!--<input type="submit" value="Submit">-->
+<button type="submit" class="btn btn-danger" >제출</button>
+<button type="button" class="btn btn-danger" onClick="history.back()">되돌아가기</button>
+  <br><br>
+  
+
+  
+  <table class="table table-striped">
+      <tr>
+       <td><strong>Title</strong></td>
+       <td><strong>Content</strong></td>
+       <td><strong>Edit</strong></td>
+       <td><strong>Delete</strong></td>
+       </tr>
+      <tr>
+       <%@posts.each do |x| %>
+        <td><%=x.title%></td>                        
+        <td><%=x.content%></td>
+        <td><a href="/home/edit/<%=x.id%>">수정</a></td>
+        <td><a href="/home/delete/<%=x.id%>">삭제</a></td>
+      </tr>
+      <%end%>
+  </table>
+</center>
